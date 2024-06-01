@@ -20,8 +20,8 @@ with container:
 # ---------------------------------------
 
 # Carregando, filtrando e limpando os dados
-df_2023 = pd.read_csv('~/Archive/Faculdade/big_data/projeto/dados/accidents_prf_2023.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
-df_2022 = pd.read_csv('~/Archive/Faculdade/big_data/projeto/dados/accidents_prf_2022.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
+df_2023 = pd.read_csv('./dados/accidents_prf_2023.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
+df_2022 = pd.read_csv('./dados/accidents_prf_2022.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
 df = pd.concat([df_2022, df_2023])
 
 if escala == 'Região Metropolitana':
