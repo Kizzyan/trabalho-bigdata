@@ -20,15 +20,23 @@ with container:
 # ---------------------------------------
 
 # Carregando, filtrando e limpando os dados
-df_2023 = pd.read_csv('./dados/accidents_prf_2023.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
-df_2022 = pd.read_csv('./dados/accidents_prf_2022.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
+# df_2023 = pd.read_csv('~/Archive/Faculdade/big_data/projeto/dados/accidents_prf_2023.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
+# df_2022 = pd.read_csv('~/Archive/Faculdade/big_data/projeto/dados/accidents_prf_2022.csv', sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
+
+url1 = 'https://drive.google.com/file/d/16-__wGh9iSbjJVgK4e8nnMFQgd8j885E/view?usp=sharing'
+url1 = 'https://drive.google.com/uc?id=' + url1.split('/')[-2]
+url2 = 'https://drive.google.com/file/d/1BNsNNFtTqtmb9KQVLEgLbLxm9LPFeE5z/view?usp=sharing'
+url2 = 'https://drive.google.com/uc?id=' + url2.split('/')[-2]
+
+df_2023 = pd.read_csv(url1,  sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
+df_2022 = pd.read_csv(url2,  sep=';', encoding='iso-8859-1',  on_bad_lines='skip', quoting=csv.QUOTE_NONE)
 df = pd.concat([df_2022, df_2023])
 
 if escala == 'Região Metropolitana':
     metropolitan_area = ['"FORTALEZA"', '"CAUCAIA"', '"EUSEBIO"', '"AQUIRAZ"', '"CASCAVEL"', '"CHOROZINHO"', '"HORIZONTE"', '"MARANGUAPE"', '"MARACANAU"', '"PACAJUS"', '"PARACURU"', '"PINDORETAMA"', '"PARAIPABA"', '"SAO GONÇALO DO AMARANTE"', '"SAO LUIZ DO CURU"', '"TRAIRI"']
-    df = df.loc[df['"municipio"'].isin(metropolitan_area) & df['"uf"'].isin(['"CE"'])]
+    df = df.loc[df['"municipio"'].isin(metropolitan_area)]
 if escala == 'Região Estadual':
-    df = df.loc[df['"uf"'].isin(['"CE"'])]
+    df = df
 
 df.columns = df.columns.str.replace('"', '')
 df = df.map(lambda x: x.replace('"', '') if isinstance(x, str) else x)
